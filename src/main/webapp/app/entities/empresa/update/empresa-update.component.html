@@ -1,0 +1,182 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-empresa-heading" data-cy="EmpresaCreateUpdateHeading" jhiTranslate="empresasApp.empresa.home.createOrEditLabel">
+        Create or edit a Empresa
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.nome" for="field_nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+          <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('nome')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.sobre" for="field_sobre">Sobre</label>
+          <textarea class="form-control" name="sobre" id="field_sobre" data-cy="sobre" formControlName="sobre"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.cnpj" for="field_cnpj">Cnpj</label>
+          <input type="text" class="form-control" name="cnpj" id="field_cnpj" data-cy="cnpj" formControlName="cnpj" />
+          <div *ngIf="editForm.get('cnpj')!.invalid && (editForm.get('cnpj')!.dirty || editForm.get('cnpj')!.touched)"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.razaoSocial" for="field_razaoSocial">Razao Social</label>
+          <input
+            type="text"
+            class="form-control"
+            name="razaoSocial"
+            id="field_razaoSocial"
+            data-cy="razaoSocial"
+            formControlName="razaoSocial"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.dataConstituicao" for="field_dataConstituicao"
+            >Data Constituicao</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dataConstituicao"
+              data-cy="dataConstituicao"
+              type="text"
+              class="form-control"
+              name="dataConstituicao"
+              ngbDatepicker
+              #dataConstituicaoDp="ngbDatepicker"
+              formControlName="dataConstituicao"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataConstituicaoDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.logoUrl" for="field_logoUrl">Logo Url</label>
+          <input type="text" class="form-control" name="logoUrl" id="field_logoUrl" data-cy="logoUrl" formControlName="logoUrl" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.linkFacebook" for="field_linkFacebook">Link Facebook</label>
+          <input
+            type="text"
+            class="form-control"
+            name="linkFacebook"
+            id="field_linkFacebook"
+            data-cy="linkFacebook"
+            formControlName="linkFacebook"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.linkInstagram" for="field_linkInstagram"
+            >Link Instagram</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="linkInstagram"
+            id="field_linkInstagram"
+            data-cy="linkInstagram"
+            formControlName="linkInstagram"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.linkLinkedin" for="field_linkLinkedin">Link Linkedin</label>
+          <input
+            type="text"
+            class="form-control"
+            name="linkLinkedin"
+            id="field_linkLinkedin"
+            data-cy="linkLinkedin"
+            formControlName="linkLinkedin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.linkTwitter" for="field_linkTwitter">Link Twitter</label>
+          <input
+            type="text"
+            class="form-control"
+            name="linkTwitter"
+            id="field_linkTwitter"
+            data-cy="linkTwitter"
+            formControlName="linkTwitter"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.site" for="field_site">Site</label>
+          <input type="text" class="form-control" name="site" id="field_site" data-cy="site" formControlName="site" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.ativo" for="field_ativo">Ativo</label>
+          <input type="checkbox" class="form-check" name="ativo" id="field_ativo" data-cy="ativo" formControlName="ativo" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="empresasApp.empresa.criado" for="field_criado">Criado</label>
+          <div class="d-flex">
+            <input
+              id="field_criado"
+              data-cy="criado"
+              type="datetime-local"
+              class="form-control"
+              name="criado"
+              formControlName="criado"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('criado')!.invalid && (editForm.get('criado')!.dirty || editForm.get('criado')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('criado')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('criado')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

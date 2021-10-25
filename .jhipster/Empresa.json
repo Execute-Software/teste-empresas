@@ -1,0 +1,72 @@
+{
+  "name": "Empresa",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "sobre",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "cnpj",
+      "fieldType": "String",
+      "fieldValidateRules": ["unique"]
+    },
+    {
+      "fieldName": "razaoSocial",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dataConstituicao",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "logoUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "linkFacebook",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "linkInstagram",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "linkLinkedin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "linkTwitter",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "site",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "criado",
+      "fieldType": "ZonedDateTime",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "empresa",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211025155914"
+}

@@ -1,0 +1,42 @@
+entity Empresa {
+	nome String required
+    sobre TextBlob
+    cnpj String unique
+    razaoSocial String
+    dataConstituicao LocalDate
+    logoUrl String
+    linkFacebook String
+    linkInstagram String
+    linkLinkedin String
+    linkTwitter String
+    site String
+    ativo Boolean
+    criado ZonedDateTime required
+}
+
+entity Endereco {
+	nome String required
+	cep String required
+    logradouro String
+    numero String
+    complemento String
+    bairro String
+    cidade String
+    estado String
+}
+
+/**
+ * Many to many relationship.
+ */
+relationship ManyToOne {
+    Endereco{empresa(nome)} to Empresa
+}
+
+
+// Set pagination options
+paginate * with pagination
+dto * with mapstruct
+service all with serviceImpl
+filter *
+
+

@@ -1,0 +1,126 @@
+package software.execute.empresas.service;
+
+import java.util.List;
+import javax.persistence.criteria.JoinType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import software.execute.empresas.domain.*; // for static metamodels
+import software.execute.empresas.domain.Endereco;
+import software.execute.empresas.repository.EnderecoRepository;
+import software.execute.empresas.service.criteria.EnderecoCriteria;
+import software.execute.empresas.service.dto.EnderecoDTO;
+import software.execute.empresas.service.mapper.EnderecoMapper;
+import tech.jhipster.service.QueryService;
+
+/**
+ * Service for executing complex queries for {@link Endereco} entities in the database.
+ * The main input is a {@link EnderecoCriteria} which gets converted to {@link Specification},
+ * in a way that all the filters must apply.
+ * It returns a {@link List} of {@link EnderecoDTO} or a {@link Page} of {@link EnderecoDTO} which fulfills the criteria.
+ */
+@Service
+@Transactional(readOnly = true)
+public class EnderecoQueryService extends QueryService<Endereco> {
+
+    private final Logger log = LoggerFactory.getLogger(EnderecoQueryService.class);
+
+    private final EnderecoRepository enderecoRepository;
+
+    private final EnderecoMapper enderecoMapper;
+
+    public EnderecoQueryService(EnderecoRepository enderecoRepository, EnderecoMapper enderecoMapper) {
+        this.enderecoRepository = enderecoRepository;
+        this.enderecoMapper = enderecoMapper;
+    }
+
+    /**
+     * Return a {@link List} of {@link EnderecoDTO} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public List<EnderecoDTO> findByCriteria(EnderecoCriteria criteria) {
+        log.debug("find by criteria : {}", criteria);
+        final Specification<Endereco> specification = createSpecification(criteria);
+        return enderecoMapper.toDto(enderecoRepository.findAll(specification));
+    }
+
+    /**
+     * Return a {@link Page} of {@link EnderecoDTO} which matches the criteria from the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @param page The page, which should be returned.
+     * @return the matching entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<EnderecoDTO> findByCriteria(EnderecoCriteria criteria, Pageable page) {
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+        final Specification<Endereco> specification = createSpecification(criteria);
+        return enderecoRepository.findAll(specification, page).map(enderecoMapper::toDto);
+    }
+
+    /**
+     * Return the number of matching entities in the database.
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the number of matching entities.
+     */
+    @Transactional(readOnly = true)
+    public long countByCriteria(EnderecoCriteria criteria) {
+        log.debug("count by criteria : {}", criteria);
+        final Specification<Endereco> specification = createSpecification(criteria);
+        return enderecoRepository.count(specification);
+    }
+
+    /**
+     * Function to convert {@link EnderecoCriteria} to a {@link Specification}
+     * @param criteria The object which holds all the filters, which the entities should match.
+     * @return the matching {@link Specification} of the entity.
+     */
+    protected Specification<Endereco> createSpecification(EnderecoCriteria criteria) {
+        Specification<Endereco> specification = Specification.where(null);
+        if (criteria != null) {
+            // This has to be called first, because the distinct method returns null
+            if (criteria.getDistinct() != null) {
+                specification = specification.and(distinct(criteria.getDistinct()));
+            }
+            if (criteria.getId() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getId(), Endereco_.id));
+            }
+            if (criteria.getNome() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNome(), Endereco_.nome));
+            }
+            if (criteria.getCep() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCep(), Endereco_.cep));
+            }
+            if (criteria.getLogradouro() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLogradouro(), Endereco_.logradouro));
+            }
+            if (criteria.getNumero() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getNumero(), Endereco_.numero));
+            }
+            if (criteria.getComplemento() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getComplemento(), Endereco_.complemento));
+            }
+            if (criteria.getBairro() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getBairro(), Endereco_.bairro));
+            }
+            if (criteria.getCidade() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCidade(), Endereco_.cidade));
+            }
+            if (criteria.getEstado() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEstado(), Endereco_.estado));
+            }
+            if (criteria.getEmpresaId() != null) {
+                specification =
+                    specification.and(
+                        buildSpecification(criteria.getEmpresaId(), root -> root.join(Endereco_.empresa, JoinType.LEFT).get(Empresa_.id))
+                    );
+            }
+        }
+        return specification;
+    }
+}

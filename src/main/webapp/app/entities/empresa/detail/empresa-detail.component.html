@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="empresa">
+      <h2 data-cy="empresaDetailsHeading"><span jhiTranslate="empresasApp.empresa.detail.title">Empresa</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ empresa.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.nome">Nome</span></dt>
+        <dd>
+          <span>{{ empresa.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.sobre">Sobre</span></dt>
+        <dd>
+          <span>{{ empresa.sobre }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.cnpj">Cnpj</span></dt>
+        <dd>
+          <span>{{ empresa.cnpj }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.razaoSocial">Razao Social</span></dt>
+        <dd>
+          <span>{{ empresa.razaoSocial }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.dataConstituicao">Data Constituicao</span></dt>
+        <dd>
+          <span>{{ empresa.dataConstituicao | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.logoUrl">Logo Url</span></dt>
+        <dd>
+          <span>{{ empresa.logoUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.linkFacebook">Link Facebook</span></dt>
+        <dd>
+          <span>{{ empresa.linkFacebook }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.linkInstagram">Link Instagram</span></dt>
+        <dd>
+          <span>{{ empresa.linkInstagram }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.linkLinkedin">Link Linkedin</span></dt>
+        <dd>
+          <span>{{ empresa.linkLinkedin }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.linkTwitter">Link Twitter</span></dt>
+        <dd>
+          <span>{{ empresa.linkTwitter }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.site">Site</span></dt>
+        <dd>
+          <span>{{ empresa.site }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.ativo">Ativo</span></dt>
+        <dd>
+          <span>{{ empresa.ativo }}</span>
+        </dd>
+        <dt><span jhiTranslate="empresasApp.empresa.criado">Criado</span></dt>
+        <dd>
+          <span>{{ empresa.criado | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/empresa', empresa.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
